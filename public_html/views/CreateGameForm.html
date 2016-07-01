@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>{{ creategameElements.CreateRoomPageTitle }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="CreateCss">
+        <div ng-controller="CreateGameFormController">
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="CreateTitleCss"><h1>{{ creategameElements.CreateRoomPageTitle }}</h1></div>
+                </div>
+            </div>
+            
+        <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <input ng-model="gameRoom.gameRoomTitle" class="form-control" id="inputGameRoomTitle" placeholder={{creategameElements.GameRoomInputTitle}}>
+                    
+                </div>
+            
+                <div class="col-md-5">
+                    <label id="NoTitleError">{{creategameElements.NoTitleError}}</label>
+                    
+                </div>
+        </div>
+        <!--
+        <div class="row">
+            <div class="col-sm-6">
+                <hr/>
+                    <label><input ng-model="gameRoom.infiniteCheck" ng-Click="hideDatePickers()" type="checkbox" name="infiniteEvent" value="infiniteEvent" /> {{ creategameElements.InfiniteLabel }}</label>
+                </div>
+            </div>
+        -->    
+         <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-sm-5" id="startingDate">
+               <label>{{ creategameElements.StartingDate }} <input ng-model="gameRoom.startingDate" type="date" class="form-control" name="eventStartDate"></label>
+                </div>
+             
+             <div class="col-md-6">
+                <label id="NoStartingDateError">{{creategameElements.NoStartingDateError}}</label>
+            </div>
+        </div>
+           
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-sm-5" id="endingDate">
+               <label>{{ creategameElements.EndingDate }} <input ng-model="gameRoom.endingDate" type="date" class="form-control" name="eventEndDate"></label>
+               <hr/>
+            </div>
+            
+            <div class="col-md-6">
+                <label id="NoEndingDateError">{{creategameElements.NoEndingDateError}}</label>
+                <label id="FalseEndingDateError">{{creategameElements.FalseEndingDateError}}</label>
+            </div>
+                
+        </div>
+            
+           
+            
+         
+            
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <label>  <input ng-model="gameRoom.privateCheck" type="checkbox" name="privateEvent" value="privateEvent" /> {{ creategameElements.PrivateCheck }} </label>
+                    </br>
+                    <label> {{ creategameElements.MaxPlayers }}
+                        <select ng-model="gameRoom.players">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                        </select>
+                    </label>
+                    </br>
+                    <label>{{ creategameElements.CustomParameters }}</label>
+                    <input ng-model="gameRoom.parameterNames[0]" type="input" class="form-control" id="parameterName1" placeholder={{creategameElements.ParameterName}}/>
+                    <input ng-model="gameRoom.parameterNames[1]" type="input" class="form-control" id="parameterName2" placeholder={{creategameElements.ParameterName}}/>
+                    <input ng-model="gameRoom.parameterNames[2]" type="input" class="form-control" id="parameterName3" placeholder={{creategameElements.ParameterName}}/>
+                    <input ng-model="gameRoom.parameterNames[3]" type="input" class="form-control" id="parameterName4" placeholder={{creategameElements.ParameterName}}/>
+                    <input ng-model="gameRoom.parameterNames[4]" type="input" class="form-control" id="parameterName5" placeholder={{creategameElements.ParameterName}}/>
+                    </br>
+                    <input ng-click="addParameter()" type="button" name="addParameterButton" value={{creategameElements.Add}} />
+                    <input ng-click="submit()" type="submit" name="gameRoomFormSubmit" value="{{ creategameElements.CreateSubmit }}" />
+                </div>
+                <div class="col-md-1">
+                    </br>
+                    </br>
+                    </br>
+                    <input ng-click="removeParameter(1)" type="button" id="removeParameter1" value={{creategameElements.Remove}} />
+                    <input ng-click="removeParameter(2)" type="button" id="removeParameter2" value={{creategameElements.Remove}} />
+                    <input ng-click="removeParameter(3)" type="button" id="removeParameter3" value={{creategameElements.Remove}} />
+                    <input ng-click="removeParameter(4)" type="button" id="removeParameter4" value={{creategameElements.Remove}} />
+                    <input ng-click="removeParameter(5)" type="button" id="removeParameter5" value={{creategameElements.Remove}} />
+                </div>
+                <div class="col-md-5">
+                    <img class="img-responsive" src="/images/scoregoblin_createGameRoom_500_crop1.png" alt="Chania">
+                </div>
+                <div class="col-md-1">
+            </div>
+            
+        </div>
+    </div>
+    </body>
+</html>
