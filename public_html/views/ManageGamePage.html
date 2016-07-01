@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="ManageCss">
+        <div ng-controller="ManageGamePageController" >
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{manageGameElements.ManagePageTitle}}</h1> 
+                </div>  
+            </div>
+            <div class="row" >
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr ng-repeat="x in gameRoom" >
+                                <th ng-click="setId(x.id)">{{x.title}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    
+                </div>    
+            </div>
+                
+            
+            
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    
+                    <img class="img-responsive" src="/images/ScoreGoblin_manageGame_500.png" alt="Chania"/>
+                </div>
+                <div class="col-md-5" ng-repeat="x in gameRoom | filter: {id: id}">
+                    <div class="well">
+                        <h1>{{x.title}} </h1>
+                        <h2>Admin: {{x.adminUserID}}</h2>
+                        <h3>{{manageGameElements.Players}}</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>{{manageGameElements.PlayerName}}</td>
+                                    <td>{{manageGameElements.Score}}</td>
+                                    <td ng-repeat="parameterName in x.parameterNames">{{parameterName}}</td>
+                                    <td>{{manageGameElements.ReadyCheck}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr ng-repeat="player in x.playerUserIDs">
+                                        <td>{{player}}</td>
+                                        <td>0</td>
+                                        <td ng-repeat="parameterName in x.parameterNames">0</td>
+                                        <td><label id="readyLabel">{{manageGameElements.Ready}}</label></td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                    <div class="col-sm-6" ng-repeat="x in gameRoom.gameRoomData | filter: {id: id}">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>{{manageGameElements.PlayerName}}</td>
+                                <td>{{manageGameElements.Score}}</td>
+                                <td ng-repeat="parameterName in x.parameterNames">{{parameterName}}</td>
+                                <td>{{manageGameElements.ReadyCheck}}</td>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="player in x.playerUserIDs">
+                                    <td>{{player}}</td>
+                                    <td>0</td>
+                                    <td ng-repeat="parameterName in x.parameterNames">0</td>
+                                    <td><label id="readyLabel">{{manageGameElements.Ready}}</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <!--<input ng-click="readyCheck()" type="button" id="readyCheck" value={{manageGameElements.Ready}} />-->
+                        
+                    </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <input ng-click="start()" type="button" id="startButton" value={{manageGameElements.startButtonText}} />
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

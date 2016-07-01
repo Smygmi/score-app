@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" ng-app='score-app'>
+    <head>
+        <title>Score app</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+        <script src="lib/angular.min.js"></script>	
+        <script src="lib/angular-route.min.js"></script>
+	<script src="lib/angular-resource.min.js"></script>
+        <script src="modules/MainModule.js"></script>
+        <script src="js/MainController.js"></script>
+        <script src="js/LocalizationController.js"></script>
+        <script src="js/CreateGameFormController.js"></script>
+        <script src="js/JoinGamePageController.js"></script>
+        <script src="js/ProfilePageController.js"></script>
+        <script src="js/ManageGamePageController.js"></script>
+        <script src="js/ScoreFormController.js"></script>
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/MainStyles.css">
+	
+        <script>
+            var access_token;
+            var setAccess_Token = function()
+                {
+                    access_token = arguments[0];
+                };
+
+            var getAccess_Token = function()
+                {
+                return access_token;
+                }
+        </script>
+	
+    </head>
+    <body>
+    <div ng-controller="Localization">
+            
+        <div class="container-fluid" >
+            <nav class="navbar navbar-default">
+                <div class="IndexNavBar">
+                    <div class="navbar-header">
+                        <p class="headerTitle"><a class="navbar-brand" href="#/ProfilePage">SCORE APP</a></p>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
+                        </button>
+                    </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">         <!-- NAVIGATION BAR -->
+                              <li class="linkButton"><a href="#/CreateGameForm">{{ navBarElements.CreateGameButton }} </a></li>
+                              <li><a href="#/JoinGamePage">{{ navBarElements.JoinGameButton}}</a></li> 
+                              <li><a href="#/ManageGamePage">{{ navBarElements.ManageGameButton}}</a></li> 
+                            </ul>
+                    <div>
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                            <li class="dropdown">               <!-- LANGUAGE -->
+                              <a class="dropdown-toggle" data-toggle="dropdown"> {{navBarElements.LanguageButton}}
+                              <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a ng-click="selectLanguage(1)">English</a></li>
+                                <li><a ng-click="selectLanguage(2)">Finnish</a></li>
+                                <li><a ng-click="selectLanguage(3)">Dutch</a></li> 
+                              </ul>
+                            </li>
+                        </ul>
+                    </div>
+                        </div>
+                </div>
+                
+            </nav>
+            
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-view></div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+         
+       
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div ng-controller="ScoreFormController">
+            <div ng-controller="ManageGamePageController">
+                <div  ng-repeat="x in gameRoom.gameRoomData | filter: {id:id}">
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="col-sm-2"></div>
+             <div class="col-sm-10">
+                        <h1>{{x.title}}</h1>
+                           Admin can manage scores for each player.
+             </div>
+            
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="col-sm-2">
+                        </div>
+                    
+                   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <hr>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <table >
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <!-- ng repeat players -->
+                                    <td ng-repeat="player in x.playerUserIDs"><h2>{{player}}</h2></td>
+                                </tr>
+                           </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Score</td>
+                                    <!-- ng repeat by player quantity-->
+                                    <td ng-repeat="player in x.playerUserIDs"><input type="number" class="form-control" min="0"></td>
+                                    
+                                </tr>
+                                
+                                <!-- ng repeat parameters-->
+                                
+                                <tr ng-repeat="parameter in x.parameterNames">
+                                    <td>{{parameter}}</td>
+                                    <!-- ng repeat by player quantity-->
+                                    <td ng-repeat="player in x.playerUserIDs"><input type="number" class="form-control" min="0"></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    <input type="button" value="Done" ng-click="updateScore()"/>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

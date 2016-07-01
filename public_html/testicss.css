@@ -1,0 +1,32 @@
+.loginDiv {
+    background-image: url("images/SAmaskotti_testi.png");
+    bgcolor: #000;
+    height: 500px;
+    width: 600px;
+    right: 150px;
+}
+
+.loginButton {
+    background: #2F389C;
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-family: Sans-serif;
+    font-size: 20px;
+    position: relative;
+    left: 100px;
+    top: 180px;
+    width: 130px;
+    height: 40px;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.loginButton:hover {
+    border: 1px;
+     background-color: #4CAF50; /* Green */
+     border-color: #2F389C;
+    color: white;
+    
+}
