@@ -23,7 +23,7 @@ and open the template in the editor.
         <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
-                    <input ng-model="gameRoom.gameRoomTitle" class="form-control" id="inputGameRoomTitle" placeholder={{creategameElements.GameRoomInputTitle}}>
+                    <input ng-model="gameRoom.data.Title" class="form-control" id="inputGameRoomTitle" placeholder={{creategameElements.GameRoomInputTitle}}>
                     
                 </div>
             
@@ -43,7 +43,7 @@ and open the template in the editor.
          <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-sm-5" id="startingDate">
-               <label>{{ creategameElements.StartingDate }} <input ng-model="gameRoom.startingDate" type="date" class="form-control" name="eventStartDate"></label>
+               <label>{{ creategameElements.StartingDate }} <input ng-model="gameRoom.data.StartingDate" type="date" class="form-control" name="eventStartDate"></label>
                 </div>
              
              <div class="col-md-6">
@@ -54,7 +54,7 @@ and open the template in the editor.
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-sm-5" id="endingDate">
-               <label>{{ creategameElements.EndingDate }} <input ng-model="gameRoom.endingDate" type="date" class="form-control" name="eventEndDate"></label>
+               <label>{{ creategameElements.EndingDate }} <input ng-model="gameRoom.data.EndingDate" type="date" class="form-control" name="eventEndDate"></label>
                <hr/>
             </div>
             
@@ -67,14 +67,32 @@ and open the template in the editor.
             
            
             
-         
+          <div class="row">
+                    <div class="col-md-5">
+                        <select ng-model="Player1" class="form-controller" id="player1select">
+                            <option value="">---Player 1---</option>
+                            <option ng-repeat="user in users" value="{{user.ID}}">{{user.UserName}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-5">
+                        <select ng-model="Player2" class="form-controller" id="player2select" >
+                            <option value="">---Player 2---</option>
+                            <option ng-repeat="user in users" value="{{user.ID}}">{{user.UserName}}</option>
+                        </select>
+                    </div>
+                </div>
+        
+        
             
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
-                    <label>  <input ng-model="gameRoom.privateCheck" type="checkbox" name="privateEvent" value="privateEvent" /> {{ creategameElements.PrivateCheck }} </label>
+                    <label>  <input ng-model="gameRoom.data.PrivateGame" type="checkbox" name="privateEvent" value="privateEvent" /> {{ creategameElements.PrivateCheck }} </label>
                     </br>
-                    <label> {{ creategameElements.MaxPlayers }}
+                    <!--<label> {{ creategameElements.MaxPlayers }}
                         <select ng-model="gameRoom.players">
                             <option value=1>1</option>
                             <option value=2>2</option>
@@ -91,19 +109,23 @@ and open the template in the editor.
                     <input ng-model="gameRoom.parameterNames[4]" type="input" class="form-control" id="parameterName5" placeholder={{creategameElements.ParameterName}}/>
                     </br>
                     <input ng-click="addParameter()" type="button" name="addParameterButton" value={{creategameElements.Add}} />
-                    <input ng-click="submit()" type="submit" name="gameRoomFormSubmit" value="{{ creategameElements.CreateSubmit }}" />
+                    -->
                 </div>
                 <div class="col-md-1">
-                    </br>
+                    <!--</br>
                     </br>
                     </br>
                     <input ng-click="removeParameter(1)" type="button" id="removeParameter1" value={{creategameElements.Remove}} />
                     <input ng-click="removeParameter(2)" type="button" id="removeParameter2" value={{creategameElements.Remove}} />
                     <input ng-click="removeParameter(3)" type="button" id="removeParameter3" value={{creategameElements.Remove}} />
                     <input ng-click="removeParameter(4)" type="button" id="removeParameter4" value={{creategameElements.Remove}} />
-                    <input ng-click="removeParameter(5)" type="button" id="removeParameter5" value={{creategameElements.Remove}} />
+                    <input ng-click="removeParameter(5)" type="button" id="removeParameter5" value={{creategameElements.Remove}} />-->
                 </div>
+                
+               
+
                 <div class="col-md-5">
+                    <input ng-click="submit()" type="submit" name="gameRoomFormSubmit" value="{{ creategameElements.CreateSubmit }}" />
                     <img class="img-responsive" src="/images/scoregoblin_createGameRoom_500_crop1.png" alt="Chania">
                 </div>
                 <div class="col-md-1">

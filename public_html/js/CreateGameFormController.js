@@ -7,25 +7,57 @@
 
 
 var gameRoomData = {
-	gameRoomTitle: 	"",
-        infiniteCheck: false,
-        startingDate: "",
-        endingDate: "",
-        privateCheck: false,
-        players: 0,
-        playerList: [],
-        parameterNames: []
+    data:{
+	Title: 	"",
+        StartingDate: "",
+        EndingDate: "",
+        PrivateGame: false,
+        Player1 : -1,
+        Player1UserName : "",
+        Player2 : -1,
+        Player2UserName : ""
+    }
 };
 
 
 module.controller('CreateGameFormController', ['$scope', '$http', function($scope, $http)
     {
-    $scope.gameRoom = gameRoomData;
-    $scope.gameRooms = [];
-    $scope.indexCounter = 0;
-    $scope.parameterCounter = 0;
+        
+        if (getAccess_Token() === "noToken")
+
+        {
+            window.location.href = '#/NewUserForm';
+        } else {
+        
+        $scope.users = [];
+        
+          $http.get("/getListOfOtherUsers", {headers: {'Accestoken': getAccess_Token()}})
+                    .then(function (users) {
+
+                        $scope.users = users.data.response.data;
+                        $http.get("/me", {headers: {'Accestoken': getAccess_Token()}})
+                            .then(function (user) {
+
+                        $scope.users.push(user.data.response.data[0]);
+
+                    });
+                    
+                    });
+        
+        $scope.Player1;
+        $scope.Player2;
+        
+        $scope.gameRoom = {
+            data:{
+        Title: 	"",
+        StartingDate: "",
+        EndingDate: "",
+        PrivateGame: false,
+        Score : "0-0"
+    }
+        }
     
-    $scope.parameterInputs = [  document.getElementById('parameterName1'),
+    /*$scope.parameterInputs = [  document.getElementById('parameterName1'),
                                 document.getElementById('parameterName2'),
                                 document.getElementById('parameterName3'),
                                 document.getElementById('parameterName4'),
@@ -35,7 +67,7 @@ module.controller('CreateGameFormController', ['$scope', '$http', function($scop
                                 document.getElementById('removeParameter2'),
                                 document.getElementById('removeParameter3'),
                                 document.getElementById('removeParameter4'),
-                                document.getElementById('removeParameter5')];                        
+                                document.getElementById('removeParameter5')];*/                      
     
     
     $scope.NoTitleError = document.getElementById("NoTitleError");
@@ -48,34 +80,28 @@ module.controller('CreateGameFormController', ['$scope', '$http', function($scop
     $scope.NoEndingDateError.style.display = 'none';
     $scope.FalseEndingDateError.style.display = 'none';
     
-    if($scope.parameterCounter === 0)       // Initially hides the parameter 
+    
+    /*if($scope.parameterCounter === 0)       // Initially hides the parameter 
     {                                       // boxes and their remove buttons
         for (i = 0; i < 5; i++) 
         {
         $scope.parameterInputs[i].style.display='none';
         $scope.removeButtons[i].style.display='none';
         }
-    }
-    
-    
-     $scope.isInfinite;
+    }*/
      
 
     $scope.submit = function(){
         
-        console.log($scope.isInfinite);
-        
-        if($scope.gameRoom.infiniteCheck === true) {
-            $scope.gameRoom.startingDate ="";
-            $scope.gameRoom.endingDate="";
-            console.log("infinite");
-            $scope.isInfinite = true;
-        }
-        else
-        {
-            console.log("not infinite");
-            $scope.isInfinite = false;
-        }
+        $scope.gameRoom = {
+            data:{
+        Title: 	"",
+        StartingDate: "",
+        EndingDate: "",
+        PrivateGame: false,
+        Score : "0-0"
+    }
+        };
         
          $scope.NoTitleError.style.display = 'none';
          $scope.NoStartingDateError.style.display = 'none';
@@ -84,78 +110,107 @@ module.controller('CreateGameFormController', ['$scope', '$http', function($scop
         
         
         //Checks if Title is empty
-        if($scope.gameRoom.gameRoomTitle === ""){
+        if($scope.gameRoom.Title === ""){
             $scope.NoTitleError.style.display = 'initial'; 
             return; }
         else   $scope.NoTitleError.style.display = 'none'; 
         
         //Checks if Starting Date is empty
-        if($scope.gameRoom.startingDate === "") 
+        if($scope.gameRoom.StartingDate === "") 
                 {$scope.NoStartingDateError.style.display = 'initial';
                 return;}
         else    $scope.NoStartingDateError.style.display = 'none';
                 
         //Checks if Ending Date is empty
-        if($scope.gameRoom.endingDate === "") 
+        if($scope.gameRoom.EndingDate === "") 
                 {$scope.NoEndingDateError.style.display = 'initial';
                 return;}
         else    $scope.NoEndingDateError.style.display = 'none';
                 
         
-        //Checks if Ending Date is set earlier than starting date
-        if($scope.gameRoom.endingDate < $scope.gameRoom.startingDate && !$scope.isInfinite)        
+        /*//Checks if Ending Date is set earlier than starting date
+        if($scope.gameRoom.EndingDate < $scope.gameRoom.StartingDate && !$scope.isInfinite)        
                 {$scope.FalseEndingDateError.style.display = 'initial';
                 return;}
         else    $scope.FalseEndingDateError.style.display = 'none';
-
+        */
         
+        if($scope.Player1)
+        {
+            $scope.gameRoom.data.Player1 = $scope.Player1;
+       
+            
+            for(var i = 0; i < $scope.users.length; i++)
+            {
+                if($scope.users[i].ID == $scope.Player1)
+                {
+                    console.log($scope.users[i].UserName);
+                    $scope.gameRoom.data.Player1UserName = $scope.users[i].UserName;
+                    break;
+                }
+            }
+        }
+        
+        
+        if($scope.Player2)
+        {
+            $scope.gameRoom.data.Player2 = $scope.Player2;
+       
+            
+            for(var i = 0; i < $scope.users.length; i++)
+            {
+                if($scope.users[i].ID == $scope.Player2)
+                {
+                    console.log($scope.users[i].UserName);
+                    $scope.gameRoom.data.Player2UserName = $scope.users[i].UserName;
+                    break;
+                }
+            }
+        }
+            var toPush = JSON.stringify($scope.gameRoom);
+            
+            console.log(toPush);
+            
+            $http.post("/createGameRoom", toPush, {headers: {'Accestoken': getAccess_Token()}})
+                    .then(function (response)
+            {
+                console.log(response);
+                
+            });
 
-            $scope.gameRooms.push({ 
-                                title:  $scope.gameRoom.gameRoomTitle,
-                                infiniteEvent: $scope.gameRoom.infiniteCheck,
-                                startingDate:   $scope.gameRoom.startingDate,
-                                endingDate:     $scope.gameRoom.endingDate,
-                                privateGame: $scope.gameRoom.privateCheck,
-                                maxPlayers: $scope.gameRoom.players,
-                                adminUserID:"Admin", //need user id from login info here
-                                parameterNames: $scope.gameRoom.parameterNames
-                            });
-           
-            var toPush;
-            toPush = $scope.gameRooms;
-            $http.post("/~t4toan00/testi/post_testi_data.php", toPush);
             
             //wait for gamerooms id from post response to be set on managegameroom
-            var newId = 1111;
-            setGameRoomId(newId);
-            window.location.href = '#/ManageGamePage';
+
+            //setGameRoomId(newId);
+            //window.location.href = '#/ManageGamePage';
  
         
 
     };
     
-     
+     /*
     $scope.hideDatePickers = function()
     {
-       var startingDate = document.getElementById('startingDate');
-       var endingDate = document.getElementById('endingDate');
+       var StartingDate = document.getElementById('StartingDate');
+       var EndingDate = document.getElementById('EndingDate');
        
        if($scope.isInfinite != true) {
             $scope.isInfinite = true;
-            startingDate.style.display='none';
-            endingDate.style.display='none';
+            StartingDate.style.display='none';
+            EndingDate.style.display='none';
         }
         
         else {
             $scope.isInfinite = false;
-            startingDate.style.display='initial';
-            endingDate.style.display='initial';
+            StartingDate.style.display='initial';
+            EndingDate.style.display='initial';
         }
     }
+        */
     
     
     
-    $scope.addParameter = function()
+   /* $scope.addParameter = function()
     {
         if($scope.parameterCounter < 5) {
         var parameterToShow = $scope.parameterInputs[$scope.parameterCounter];
@@ -178,7 +233,8 @@ module.controller('CreateGameFormController', ['$scope', '$http', function($scop
         $scope.parameterCounter -= 1;
         }
     };
+    */
     
-    
-    
+        }
+        
  }]);
