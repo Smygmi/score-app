@@ -1,6 +1,8 @@
 module.controller('ProfileController', ['$scope', '$http', function ($scope, $http) {
 
+
         if (getAccess_Token() === "noToken")
+
         {
             window.location.href = '#/NewUserForm';
         } else {
