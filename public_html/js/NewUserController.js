@@ -41,7 +41,7 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
             var toPush = JSON.stringify(create);
             $http.post("http://smygminraspberry1.ddns.net:8081/create_user", toPush)
                     .then(function (create_user_response) {
-                        var response = JSON.Parse(create_user_response);
+                        var response = create_user_response;
                         console.log(response);
                     });
 
