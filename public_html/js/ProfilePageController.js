@@ -14,6 +14,7 @@ module.controller('ProfileController', ['$scope', '$http', function ($scope, $ht
  
             console.log(user.data.response.data);
             $scope.user = user.data.response.data[0];
+
             
         });
         
