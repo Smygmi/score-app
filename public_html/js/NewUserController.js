@@ -39,7 +39,7 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
             create.data.LastName = $scope.create_user_LastName;
 
             var toPush = JSON.stringify(create);
-            $http.post("http://smygminraspberry1.ddns.net:8081/create_user", toPush)
+            $http.post("/create_user", toPush)
                     .then(function (create_user_response) {
                         var response = create_user_response;
                         console.log(response);
@@ -53,8 +53,8 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
             log_in.data.Password = $scope.log_in_Password;
 
             var toPush = JSON.stringify(log_in);
-            $http.post("http://smygminraspberry1.ddns.net:8081/log_in", toPush).then(function (log_in_user_response) {
-                        var response = JSON.Parse(log_in_user_response);
+            $http.post("/log_in", toPush).then(function (log_in_user_response) {
+                        var response = log_in_user_response;
                         console.log(response);
                     });;
         };
