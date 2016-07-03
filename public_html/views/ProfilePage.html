@@ -8,7 +8,6 @@
     <body>
         <div class="ProfileCss">
             <div ng-controller="ProfileController">
-
                 <div class="row">
                     <div class="col-md-12" id="ProfileTitle">
                         <div class="StylingProfileTitle"><h1>{{ profileElements.profilePageTitle}}</h1></div>
@@ -19,42 +18,51 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
                         <div class="well">
-                            <p>Welcome to score app {{ user.UserName}}</p>
+                            <h1>Welcome to score app! </h1>
+                            <h2>User: {{ user.UserName}}</h2>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="well">
-                            <img src="images/ScoreGoblin_profile_420.png" class="img-rounded" alt="">
+                            <img src="images/ScoreGoblin_profile_420_crop.png" class="img-rounded" alt="">
                         </div>
                     </div>
-
-
                 </div>
-
-
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
                         <div class="well">
+                            <h1>Here is a list of your games</h1>
                             <table class="table table-hover">
                                 <thead>
                                     <tr ng-repeat="x in userGames" >
-                                        <th ng-click="setId(x.id)"> {{ x.title}} </th>
+                                        <th ng-click="setId(x.Room_ID)"> {{ x.Title}} </th>
                                     </tr>
                                 </thead>
                             </table>
-
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="well">
-                            <div  ng-repeat= "x in userGames| filter: {id: specificRecords}" >
-                                <h1>{{ x.title}}</h1>
+                            <div  ng-repeat= "x in userGames | filter: {Room_ID: specificRecords}" >
+                                <h1>{{ x.Title}}</h1>
                                 <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Start date</th>
+                                            <th>End date</th>
+                                            <th>Score</th>
+                                            <th>Player 1</th>
+                                            <th>Player 2</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{  x.startingDate}}</td>
-                                            <td>{{ x.score}}</td>
+                                            <td>{{  x.StartingDate}}</td>
+                                            <td>{{  x.EndingDate}}</td>
+                                            <td>{{  x.Score}}</td>
+                                            <td>{{  x.Player1UserName}}</td>
+                                            <td>{{  x.Player2UserName}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
