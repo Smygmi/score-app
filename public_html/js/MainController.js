@@ -1,4 +1,3 @@
-var sighIn = false;
 module.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/BeginPage.html'
@@ -17,8 +16,8 @@ module.config(function ($routeProvider) {
 
     }).when('/NewUserForm', {
         templateUrl: 'views/NewUserForm.html'
-        
+
     }).when('/ScoreForm', {
-                templateUrl: 'views/ScoreForm.html'
-            });
+        templateUrl: 'views/ScoreForm.html'
+    });
 });
