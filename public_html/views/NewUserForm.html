@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -11,6 +6,68 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div ng-controller="NewUserController">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="well">
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><label>Username</label></th>
+                                        <th><label>Password</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input ng-model="log_in_UserName" class="form-control" id="log_in_UserName" placeholder="Username">
+                                        </td>
+                                        <td>
+                                            <input ng-model="log_in_UserPassword" class="form-control" id="log_in_UserName" placeholder="Password">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-success" ng-click="logInUser()">Log in</button>
+                    </div>
+                </div>    
+                <div class="col-md-5">
+                    <div class="well">
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><label>Username</label></th>
+                                        <th><label>Password</label></th>
+                                        <th><label>First name</label></th>
+                                        <th><label>Last name</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input ng-model="create_user_UserName" class="form-control" id="log_in_UserName" placeholder="Username">
+                                        </td>
+                                        <td>
+                                            <input ng-model="create_user_UserPassword" class="form-control" id="log_in_UserName" placeholder="Password">
+                                        </td>
+                                        <td>
+                                            <input ng-model="create_user_FirstName" class="form-control" id="log_in_UserName" placeholder="First name">
+                                        </td>
+                                        <td>
+                                            <input ng-model="create_user_LastName" class="form-control" id="log_in_UserName" placeholder="Last name">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>                                              
+                        </div>
+                        <button type="button" class="btn btn-success" ng-click="createUser()">Create user</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
