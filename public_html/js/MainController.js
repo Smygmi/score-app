@@ -1,9 +1,5 @@
 var sighIn = false;
-
-
-module.config(function ($routeProvider, $httpProvider) {
-
-
+module.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/BeginPage.html'
 
@@ -21,8 +17,8 @@ module.config(function ($routeProvider, $httpProvider) {
 
     }).when('/NewUserForm', {
         templateUrl: 'views/NewUserForm.html'
-    })
-            .when('/ScoreForm', {
+        
+    }).when('/ScoreForm', {
                 templateUrl: 'views/ScoreForm.html'
             });
 });
