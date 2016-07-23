@@ -41,8 +41,15 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
             var toPush = JSON.stringify(create);
             $http.post("/create_user", toPush)
                     .then(function (create_user_response) {
-                        var response = create_user_response;
+                        var response = create_user_response.data.response.data;
                         console.log(response);
+                        
+                        if(response.AccesToken)
+                        {
+                            setAccess_Token(response.AccesToken);
+                            console.log("successul");
+                            window.location.href = '#/ProfilePage';
+                        }
                     });
 
         };
