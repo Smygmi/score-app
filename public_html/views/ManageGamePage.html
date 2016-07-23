@@ -27,7 +27,7 @@ and open the template in the editor.
                                 <thead>
 
                                     <tr ng-repeat="x in adminGames" >
-                                        <th ng-click="setId(x.Room_ID)">{{x.Title}}</th>
+                                        <th class="listLink" ng-click="setId(x.Room_ID)">{{x.Title}}</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -69,7 +69,7 @@ and open the template in the editor.
                                         <td><input ng-if="x.Room_ID === id" ng-model="x.score2" type="text" class="form-control" id="inputScore2" placeholder="{{formatScore(x.Score, 2)}}"><td>
                                         <!--<td>{{formatScore(x.Score, 2)}}</td>-->
                                     </tr>
-                                    <tr><td><button type="button" class="btn btn-success" ng-click="updateScore(x.Room_ID, x.score1, x.score2)">Edit</button></td></tr>
+                                    <tr><td><button type="button" class="btn btn-success" ng-click="updateScore(x.Room_ID, x.score1, x.score2)">Save</button></td></tr>
                                 </tbody>
                             </table>
                         </div>

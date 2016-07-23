@@ -39,8 +39,9 @@ and open the template in the editor.
                             <div class="well" >
                                 <table class="table table-hover">
                                     <thead>
+                                    <h1>Games to join</h1>
                                         <tr ng-repeat="x in gamesToJoin" >
-                                            <th ng-click="setId(x.Room_ID)"> {{ x.Title}} </th>
+                                            <th class="listLink" ng-click="setId(x.Room_ID)"> {{ x.Title}} </th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -51,12 +52,25 @@ and open the template in the editor.
                                 <div class="well">
                                     <h1>{{ x.Title }}</h1>
                                     <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Start date</th>
+                                            <th>End date</th>
+                                            <th>Score</th>
+                                            <th>Player1</th>
+                                            <th>Player2</th>
+                                        </tr>
+                                    </thead>
+                                    
                                         <tbody>
                                             <tr>
-                                                <td>{{ formatDate(x.StartingDate) }}</td>
-                                                <td>{{ x.Score }}</td>
-                                                <td><button type="button" class="btn btn-success" ng-click="joinGame(x.Room_ID)">Join</button></td>
-                                            </tr>
+                                            <td>{{  formatDate(x.StartingDate)}}</td>
+                                            <td>{{  formatDate(x.EndingDate) }}</td>
+                                            <td>{{  x.Score}}</td>
+                                            <td>{{  x.Player1UserName}}</td>
+                                            <td>{{  x.Player2UserName}}</td>
+                                            <td><button type="button" class="btn btn-success" ng-click="joinGame(x.Room_ID)">Join</button></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
