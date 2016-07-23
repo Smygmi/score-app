@@ -1,75 +1,75 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/*
-var fetchedGameRoomData = {
-    gameRoomData : [
-        { 
-            id:             1111,
-            title:          "",
-            infiniteEvent:  true,
-            startingDate:   "",
-            endingDate:     "",
-            privateGame:    true,
-            maxPlayers:     0,
-            adminUserID:    "pp",
-            score:          "0",
-            parameterNames: [],
-            parameterValues:[],
-            playerUserIDs:  ["", ""]
-        }
-        
-            ]
-   };
 
-*/
-
-
-
-
-module.controller('ManageGamePageController', ['$scope', '$http', function($scope, $http)
+module.controller('ManageGamePageController', ['$scope', '$http', function ($scope, $http)
     {
-        $scope.setGameRoomId = function(){
-            $scope.id = arguments[0];
-        };
 
-        $scope.getGameRoomid = function()
+        $scope.adminGames;
+        $scope.id = -1;
+
+        if (getAccess_Token() === "noToken")
+
         {
-            return $scope.id;
-        };
-        
-        $scope.gameRoom = " ";
-        $scope.testID;
-        $scope.id = " ";
-        $scope.readyCheckState = false;
-        
+            window.location.href = '#/NewUserForm';
+        } else {
+
+            $scope.score1;
+            $scope.score2;
+             
+             
+             
+            $http.get("/getListRoomsWereAdmin", {headers: {'Accestoken': getAccess_Token()}}).then(function (adminGames)
+            {
+                $scope.adminGames = adminGames.data.response.data;
+                for(var i in $scope.adminGames) {
+                    var temp = $scope.adminGames[i].Score.split("-");
+                    $scope.adminGames[i].score1 = temp[0];
+                    $scope.adminGames[i].score2 = temp[1];
+                }
+
+            });
+
+
+
+            $scope.setId = function ()
+            {
+                $scope.id = arguments[0];
+
+            };
+
+            $scope.formatScore = function () {
+                var score = arguments[0];
+                var out = score.split('-');
+                if (arguments[1] === 1)
+                {
+                    return out[0];
+                } else {
+                    return out[1];
+                }
+            };
+            
        
-            $http.get("/feikki_p_responset/feikki_gameroomeja.php").then(function(response) {
-                console.log(JSON.stringify(response));
-             //fetchedGameRoomData.gameRoomData = apu;
-             $scope.gameRoom = response.data.gamerooms;
-        });
+                
 
-        $scope.setId = function()
-        {
-            $scope.id = arguments[0];
-            //window.location.href= "#/ManageGamePage";
-            console.log($scope.id);
-        };
-        
-        
-        
-        $scope.readyCheck = function()
-        {
-            document.getElementById('readyLabel').style.display = 'inline';
-        };
-        
-        $scope.start = function()
-        {
-            window.location.href = '#/ScoreForm';
-        };
-        
+            $scope.updateScore = function (Room_ID, score1, score2) {
+                
+                console.log(Room_ID + score1 + score2);
+                
+                $scope.toPut = {
+                    data: {
+                        Room_ID: arguments[0]
+                    }
+                }
+                
+                $scope.toPut.data.Score = "" + arguments[1] + "-" + arguments[2];
+                
+                $http.put("/updateScore", $scope.toPut, {headers: {'Accestoken': getAccess_Token()}})
+                    .then(function (response)
+                    {
+                        console.log(response);
+
+                    });
+                    
+            };
+
+        }
     }]);
 

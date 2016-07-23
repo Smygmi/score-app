@@ -21,14 +21,14 @@ module.controller('ProfileController', ['$scope', '$http', function ($scope, $ht
             $http.get("/me", {headers: {'Accestoken': getAccess_Token()}})
                     .then(function (user) {
 
-                        console.log(user.data.response.data);
+                        //console.log(user.data.response.data);
                         $scope.user = user.data.response.data[0];
 
                     });
 
             $http.get("/getListOfMyGames", {headers: {'Accestoken': getAccess_Token()}}).then(function (userGames)
             {
-                console.log(userGames.data.response.data);
+                //console.log(userGames.data.response.data);
                 $scope.userGames = userGames.data.response.data;
             });
 
@@ -36,6 +36,14 @@ module.controller('ProfileController', ['$scope', '$http', function ($scope, $ht
             $scope.setId = function () {
                 $scope.specificRecords = arguments[0];
             };
+            
+            
+            $scope.formatDate = function () {
+            var s = arguments[0];
+            var date = s.split('T');
+            return date[0];
+        };
+
         }
 
     }]);
