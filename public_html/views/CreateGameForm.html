@@ -46,8 +46,22 @@
                             <input ng-model="gameRoom.data.PrivateGame" type="checkbox" name="privateEvent" value="privateEvent" />
                         </div>
                         <div>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><label>Player1 score</label></td>
+                                        <td><label>Player2 score</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input ng-model="Score1" class="form-control" id="inputGameRoomScore1" placeholder="Player1 score"></td>
+                                        <td><input ng-model="Score2" class="form-control" id="inputGameRoomScore2" placeholder="Player2 score"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--
                             <label>Game score</label> 
                             <input ng-model="gameRoom.data.Score" class="form-control" id="inputGameRoomScore" placeholder={{creategameElements.GameRoomInputScore}}>
+                            -->
                         </div>
                         <button ng-click="submit()" type="button" class="btn btn-success" name="gameRoomFormSubmit">{{creategameElements.CreateSubmit}}</button>
                     </div>
