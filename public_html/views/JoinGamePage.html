@@ -39,27 +39,28 @@ and open the template in the editor.
                             <div class="well" >
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr ng-repeat="x in gamesReadyToJoin" >
-                                            <th ng-click="setId(x.id)"> {{ x.title}} </th>
+                                        <tr ng-repeat="x in gamesToJoin" >
+                                            <th ng-click="setId(x.Room_ID)"> {{ x.Title}} </th>
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <div ng-repeat= "x in gamesReadyToJoin | filter: {id: specificGameToJoin}">
+                            <div ng-repeat= "x in gamesToJoin | filter: {Room_ID: focusedGame}">
                                 <div class="well">
-                                    <h1>{{ x.title }}</h1>
+                                    <h1>{{ x.Title }}</h1>
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>{{  x.startingDate }}</td>
-                                                <td>{{ x.score }}</td>
+                                                <td>{{ formatDate(x.StartingDate) }}</td>
+                                                <td>{{ x.Score }}</td>
+                                                <td><button type="button" class="btn btn-success" ng-click="joinGame(x.Room_ID)">Join</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 

@@ -4,55 +4,82 @@
  * and open the template in the editor.
  */
 
-module.controller ('JoinGamePageController', ['$scope', '$http', function($scope, $http)
-{
-    $scope.gamesReadyToJoin = " ";
-    $scope.specificGameToJoin = " ";
-    
-    if(window.location.href === "http://www.scoreapp.shiksha/#/JoinGamePage"){
-        //User is not logged in. Handle it here.
-    }
-    else{
-        $http.get("/feikki_p_responset/feikki_gameroomeja.php").then(function(gameroomRecords){
-                 console.log(JSON.stringify(gameroomRecords.data.gamerooms));
-            $scope.gamesReadyToJoin = gameroomRecords.data.gamerooms;
-            });
-    }
-    
-    
-    $scope.setId = function()
+module.controller('JoinGamePageController', ['$scope', '$http', function ($scope, $http)
+    {
+        $scope.gamesToJoin;
+        $scope.focusedGame = -1;
+
+        if (getAccess_Token() === "noToken")
+
         {
-            $scope.specificGameToJoin = arguments[0];
+            window.location.href = '#/NewUserForm';
+        } else {
+            $http.get("/getListOfGamesToJoin", {headers: {'Accestoken': getAccess_Token()}})
+                    .then(function (gameRooms) {
+                        $scope.gamesToJoin = gameRooms.data.response.data;
+
+
+                    });
         }
-        
-    $scope.SearchButton = function(){
-        //search function filtering goes here.
-        
-    }
-    /*
-    $scope.displayGameBox = document.getElementById("displayGameBox");
-    $scope.displayGameBox.style.display = 'none';
-    
-    $scope.dataHolder = [];
-    
-     $http.get("/~t4toan00/testi/feikki_gameroomeja.php").then(function(response){
-        console.log(JSON.stringify(response));
-        $scope.dataHolder =  response.data.gamerooms;
-        console.log($scope.dataHolder);
-        
-        });  
-        
-    $scope.displayGame = function(){
-        
-    setGameRoomId(arguments[0]);
-    $scope.TempId = getGameRoomid();
-    
-    $scope.displayGameBox.style.display = 'initial';
-    console.log(getGameRoomid());
-    }
-  */
-}]);
 
 
+        $scope.setId = function ()
+        {
+            $scope.focusedGame = arguments[0];
+        };
 
-// ÄLÄ HUKKAA dataHolder.data.gameroom
+        $scope.formatDate = function () {
+            var s = arguments[0];
+            var date = s.split('T');
+
+            return date[0];
+        };
+
+
+        $scope.joinGame = function () {
+
+            $scope.toPush = {
+                data: {
+                    Room_ID: $scope.focusedGame
+                }
+            }
+            
+            $scope.gameRoomToJoin;
+            
+            for(var i = 0; i < $scope.gamesToJoin.length; i++)
+            {
+                if($scope.gamesToJoin[i].Room_ID === $scope.focusedGame)
+                {
+                    //console.log($scope.gamesToJoin[i]);
+                    $scope.gameRoomToJoin = $scope.gamesToJoin[i];
+    
+                }
+            }
+            
+            //console.log($scope.gameRoomToJoin);
+            
+            
+            if ($scope.gameRoomToJoin.Player1 === null)
+            {
+                $scope.toPush.data.Player1 = true;
+                
+            } else if ($scope.gameRoomToJoin.Player2 === null)
+            {
+                $scope.toPush.data.Player2 = true;
+            }
+            
+            
+            $http.post("/joinGame", $scope.toPush, {headers: {'Accestoken': getAccess_Token()}})
+                    .then(function (response)
+                    {
+                        console.log(response);
+
+                    })
+        };
+
+        $scope.SearchButton = function () {
+            //search function filtering goes here.
+
+        };
+
+    }]);
