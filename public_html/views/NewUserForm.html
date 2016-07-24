@@ -25,7 +25,7 @@
                                             <input ng-model="log_in_UserName" class="form-control" id="log_in_UserName" placeholder="Username">
                                         </td>
                                         <td>
-                                            <input ng-model="log_in_UserPassword" class="form-control" id="log_in_UserName" placeholder="Password">
+                                            <input ng-model="log_in_UserPassword" type="password" class="form-control" id="log_in_UserPassword" placeholder="Password" ng-keydown="enterPressed($event)">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -49,16 +49,16 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input ng-model="create_user_UserName" class="form-control" id="log_in_UserName" placeholder="Username">
+                                            <input ng-model="create_user_UserName" class="form-control" id="create_UserName" placeholder="Username" >
                                         </td>
                                         <td>
-                                            <input ng-model="create_user_UserPassword" class="form-control" id="log_in_UserName" placeholder="Password">
+                                            <input ng-model="create_user_UserPassword" type="password" class="form-control" id="create_UserPassword" placeholder="Password" ng-keydown="enterPressed($event)">
                                         </td>
                                         <td>
-                                            <input ng-model="create_user_FirstName" class="form-control" id="log_in_UserName" placeholder="First name">
+                                            <input ng-model="create_user_FirstName" class="form-control" id="create_FirstName" placeholder="First name" ng-keydown="enterPressed($event)">
                                         </td>
                                         <td>
-                                            <input ng-model="create_user_LastName" class="form-control" id="log_in_UserName" placeholder="Last name">
+                                            <input ng-model="create_user_LastName" class="form-control" id="create_LasttName" placeholder="Last name" ng-keydown="enterPressed($event)">
                                         </td>
                                     </tr>
                                 </tbody>

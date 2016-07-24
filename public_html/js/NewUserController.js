@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 var log_in = {
     data: {
         UserName: "",
@@ -43,15 +37,14 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
                     .then(function (create_user_response) {
                         var response = create_user_response.data.response.data;
                         console.log(response);
-                        
-                        if(response.AccesToken)
+
+                        if (response.AccesToken)
                         {
                             setAccess_Token(response.AccesToken);
                             console.log("successul");
                             window.location.href = '#/ProfilePage';
                         }
                     });
-
         };
 
         $scope.logInUser = function () {
@@ -64,16 +57,30 @@ module.controller('NewUserController', ['$scope', '$http', function ($scope, $ht
                     .then(function (log_in_user_response) {
                         var response = log_in_user_response.data.response.data;
                         //console.log(response);
-                        if(response.AccesToken)
+                        if (response.AccesToken)
                         {
                             setAccess_Token(response.AccesToken);
                             console.log("successul");
                             window.location.href = '#/ProfilePage';
                         }
-
                     });
             ;
         };
 
-
+        $scope.enterPressed = function (event) {
+            if (event.keyCode === 13) {
+                if (event.target.id === "log_in_UserPassword") {
+                    $scope.logInUser();
+                }
+                if (event.target.id === "create_UserPassword") {
+                    $scope.createUser();
+                }
+                if (event.target.id === "create_FirstName") {
+                    $scope.createUser();
+                }
+                if (event.target.id === "create_LasttName") {
+                    $scope.createUser();
+                }
+            }
+        };
     }]);
