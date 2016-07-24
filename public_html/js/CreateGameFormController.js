@@ -104,6 +104,9 @@ module.controller('CreateGameFormController', ['$scope', '$http', function ($sco
                 $http.post("/createGameRoom", toPush, {headers: {'Accestoken': getAccess_Token()}}).then(function (response)
                 {
                     console.log(response);
+                    if (response.data.response.data === "GAMEROOM_CREATED") {
+                        window.location.href = '#/ManageGamePage';
+                    }
                 });
             };
         }
