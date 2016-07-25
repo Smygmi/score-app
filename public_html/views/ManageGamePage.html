@@ -61,15 +61,22 @@ and open the template in the editor.
                                     <tr>
                                         <td>{{x.Player1UserName}}</td>
                                         <td><input ng-if="x.Room_ID === id" ng-model="x.score1" type="text" class="form-control" id="inputScore1" placeholder="{{formatScore(x.Score, 1)}}"><td>
-                                        <!--<td>{{formatScore(x.Score, 1)}}</td>-->
+                                            <!--<td>{{formatScore(x.Score, 1)}}</td>-->
                                     </tr>
 
                                     <tr>
                                         <td>{{x.Player2UserName}}</td>
                                         <td><input ng-if="x.Room_ID === id" ng-model="x.score2" type="text" class="form-control" id="inputScore2" placeholder="{{formatScore(x.Score, 2)}}"><td>
-                                        <!--<td>{{formatScore(x.Score, 2)}}</td>-->
+                                            <!--<td>{{formatScore(x.Score, 2)}}</td>-->
                                     </tr>
-                                    <tr><td><button type="button" class="btn btn-success" ng-click="updateScore(x.Room_ID, x.score1, x.score2)">Save</button></td></tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-success" ng-click="updateScore(x.Room_ID, x.score1, x.score2)">Save</button>
+                                        </td>
+                                        <td>
+                                            {{ responseMessage}}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
